@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Search Engine Feedback - Preferences</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="../css/bootstrap.min.css" rel="stylesheet" />
   <link href="../css/options.css" rel="stylesheet" />
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/options.js"></script>
+  <style>
+    body {
+      position: relative;
+      padding-top: 50px;
+    }
+  </style>
 </head>
-<body>
-<div class="container">
-  <h1>My First Bootstrap Page</h1>
-  <p>This part is inside a .container class.</p>
-  <p>The .container class provides a responsive fixed width container.</p>
-</div>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#jumbotron_title">Searcg Engine Feedback</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec_overview">拡張機能の概要</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section3">Section 3</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="jumbotron_title" class="container-fluid p-5 bg-primary text-white text-center">
+    <h1>Search Engine Feedback</h1>
+  </div>
+  <div class="container mt-5">
+    <h1 id="sec_overview">拡張機能の概要</h1>
+    <p>
+      検索エンジンから返答される検索結果には、理想的な情報量の文書で上位が埋め尽くされていることが理想です。<br />
+      しかしながら、検索結果の上位には中身のない(=情報が何も得られない)Webページは多く表示されることも少なくなく、情報収集の妨げにもなっています。
+    </p>
+    <p>
+      そういったWebページを検索結果の上位に表示されにくくなるような手法を提案すべく、クラウドソーシングのような形式でデータを収集する目的でこの拡張機能は開発されました。
+    </p>
+    <p>This part is inside a .container class.</p>
+    <p>The .container class provides a responsive fixed width container.</p>
+  </div>
 </body>
 </html>
