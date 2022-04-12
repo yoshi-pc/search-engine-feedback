@@ -11,40 +11,56 @@
   <style>
     body {
       position: relative;
-      padding-top: 50px;
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <div class="container-fluid">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#jumbotron_title">Searcg Engine Feedback</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#sec_overview">拡張機能の概要</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#section3">Section 3</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div id="jumbotron_title" class="container-fluid p-5 bg-primary text-white text-center">
+<body>
+  <div id="jumbotoron_title" class="container-fluid p-5 bg-primary text-white text-center">
     <h1>Search Engine Feedback</h1>
   </div>
   <div class="container mt-5">
-    <h1 id="sec_overview">拡張機能の概要</h1>
-    <p>
-      検索エンジンから返答される検索結果には、理想的な情報量の文書で上位が埋め尽くされていることが理想です。<br />
-      しかしながら、検索結果の上位には中身のない(=情報が何も得られない)Webページは多く表示されることも少なくなく、情報収集の妨げにもなっています。
-    </p>
-    <p>
-      そういったWebページを検索結果の上位に表示されにくくなるような手法を提案すべく、クラウドソーシングのような形式でデータを収集する目的でこの拡張機能は開発されました。
-    </p>
-    <p>This part is inside a .container class.</p>
-    <p>The .container class provides a responsive fixed width container.</p>
+    <div>
+      <h2>この拡張機能の概要</h2>
+      <p>
+        検索エンジンから返答される検索結果には、理想的な情報量の文書で上位が埋め尽くされていることが理想です。<br />
+        しかしながら、検索結果の上位には中身のない(=情報が何も得られない)Webページは多く表示されることも少なくなく、情報収集の妨げにもなっています。
+      </p>
+      <p>
+        そういったWebページを検索結果の上位に表示されにくくなるような手法を提案すべく、クラウドソーシングのような形式でデータを収集する目的でこの拡張機能は開発されました。
+      </p>
+    </div>
+    
+    <div>
+      <h2>この拡張機能が扱う情報</h2>
+      この拡張機能は、研究の性質上、インストールされたChromeブラウザについて情報収集を行い、リモートのサーバーにそれらを送信することがあります。<br />
+      その際、以下に挙げる情報を送信する可能性があります：
+      <ul class="list-group pt-3">
+        <li class="list-group-item"><mark>検索クエリ</mark><p>Googleを用いて検索したワードについて、収集し送信します。ユーザー名や個人情報は追加で収集せず、いわゆる検索窓に入力されている単語群を送信します。</p></li>
+        <li class="list-group-item"><mark>訪問したページ</mark><p>あなたがどのページを閲覧したのか、収集し送信します。閲覧したページ内についての情報は、この拡張機能では収集を行いません。Googleの検索結果のページから取得可能な情報のみ送信します。</p></li>
+        <li class="list-group-item"><mark>結果順位</mark><p>あなたが訪問したページがどの程度上位に表示されていたいのか、収集し送信します。</p></li>
+      </ul>
+      <br />
+      以下に挙げる条件を守ることを誓います：
+      <ul class="list-group pt-3">
+        <li class="list-group-item">あなたが手動で選択したもののみ情報を送信します。評価画面を通じて送信に同意していただいた情報のみ送信します。</li>
+        <li class="list-group-item">あなたが知らないうちに情報を送信しません。マルウェアのように、あなたの意図しないような動作を行いません。</li>
+        <li class="list-group-item">情報を送信した際には、あなたに分かりやすく表示します。</li>
+        <li class="list-group-item">個人が特定できるような情報を付加して送信したりしません。あなたのIPアドレスやGメールアドレス、PCの使用状況などといった情報は一切送信しません。</li>
+      </ul>
+      <br />
+      ただし、以下の内容にあなたは同意していただく必要があります:
+      <ul class="list-group pt-3">
+        <li class="list-group-item">あなたが送信することに同意した情報に個人情報が含まれていても、リモートに保存されることに異論はありません。</li>
+        <li class="list-group-item">あなたが一度送信した情報について、取り消しを要求することは行いません。</li>
+      </ul>
+      <br />
+      以上の事項について、<mark>全て確認・同意</mark>していただいた場合のみ、この拡張機能を用いたプロジェクトにご参加ください。もし、1つでもご同意をいただけないのであれば、この拡張機能を削除してください。
+    </div>
+    <div>
+      <h2>開発情報</h2>
+      この拡張機能は、<a href="https://github.com/yoshi-pc/search-engine-feedback">search-engine-feedback</a>にてソースコードを公開しています。<br />
+    </div>
   </div>
 </body>
 </html>
