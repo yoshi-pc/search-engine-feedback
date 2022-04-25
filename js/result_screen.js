@@ -14,8 +14,9 @@ $(document).ready(function(){
             const ROOT = 'div#rso > div';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
-            
-            console.log('検索クエリ:' + s_query + ', リンク先:' + href_url + ', 順位:' + (get_param_int(location.href, 'start') + scan_order(ROOT, $(this))));
+            let s_order = get_param_int(location.href, 'start') + scan_order(ROOT, $(this));
+
+            print_dump(s_query, href_url, s_order);
         });
     }
 
@@ -26,8 +27,9 @@ $(document).ready(function(){
             const ROOT = '.Contents__innerGroupBody';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
+            let s_order = get_param_int(location.href, 'b') + scan_order(ROOT, $(this));
 
-            console.log('検索クエリ:' + s_query + ', リンク先:' + href_url + ', 順位:' + (get_param_int(location.href, 'b') + scan_order(ROOT, $(this))));
+            print_dump(s_query, href_url, s_order);
         })
     }
 
@@ -38,8 +40,9 @@ $(document).ready(function(){
             const ROOT = 'ol#b_results';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
+            let s_order = get_param_int(location.href, 'first') + scan_order(ROOT, $(this));
 
-            console.log('検索クエリ:' + s_query + ', リンク先:' + href_url + ', 順位:' + (get_param_int(location.href, 'first') + scan_order(ROOT, $(this))));
+            print_dump(s_query, href_url, s_order);
         });
     }
 
@@ -58,5 +61,9 @@ $(document).ready(function(){
         let value = new URLSearchParams(url).get(key);
         if (value === null) return 0;
         else return parseInt(value);
+    }
+
+    function print_dump(q, h, o) {
+        console.log('検索クエリ:' + q + ', リンク先:' + h + ', 順位:' + o);
     }
 });
