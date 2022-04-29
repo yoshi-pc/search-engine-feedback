@@ -7,6 +7,10 @@ $(document).ready(function(){
         onBing();
     }
 
+    $('a').click(function(e) {
+        console.log('x:' + e.clientX + ', y:' + e.clientY);
+    });
+
     function onGoogle() {
         $('div#search a').on('click', function(e) {
             // ページの遷移を抑止
