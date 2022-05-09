@@ -18,12 +18,12 @@ $(document).ready(function(){
             const ROOT = 'div#rso > div';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
-            let s_order = get_param_int(location.href, 'start') + scan_order(ROOT, $(this));
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
-            
             open_tab(href_url);
-            $('body').append('<div class=\"ext_feedback\">hello!</div>');
+            add_element(scanned[1]);
         });
     }
 
@@ -34,11 +34,12 @@ $(document).ready(function(){
             const ROOT = '.Contents__innerGroupBody';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
-            let s_order = get_param_int(location.href, 'b') + scan_order(ROOT, $(this));
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
-
             open_tab(href_url);
+            add_element(scanned[1]);
         })
     }
 
@@ -49,11 +50,12 @@ $(document).ready(function(){
             const ROOT = 'ol#b_results';
             let s_query = $('input').val();
             let href_url = $(this).attr('href');
-            let s_order = get_param_int(location.href, 'first') + scan_order(ROOT, $(this));
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
-
             open_tab(href_url);
+            add_element(scanned[1]);
         });
     }
 
@@ -65,7 +67,7 @@ $(document).ready(function(){
             s_order = parent.index(temp);
         } while(temp !== null && s_order === -1)
 
-        return s_order;
+        return [s_order, temp];
     }
 
     function get_param_int(url, key) {
@@ -79,6 +81,18 @@ $(document).ready(function(){
     }
 
     function open_tab(url) {
-        window.open(url, '_blank');
+        // window.open(url, '_blank');
+    }
+
+    function det_idname() {
+        const date = new Date();
+        return 'ext_' + date.getHours().toString().padStart(2, '0') + date.getMinutes().toString().padStart(2, '0') + date.getSeconds().toString().padStart(2, '0');
+    }
+
+    function add_element(elm) {
+        let offset_c = elm.offset();
+        const idname = det_idname();
+        $('body').append('<div class=\"ext_feedback\" id=' + idname + '>hello!</div>');
+        $('#' + idname).offset({top: offset_c.top, left: (offset_c.left + elm.width() + 100)});
     }
 });
