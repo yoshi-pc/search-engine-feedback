@@ -5,7 +5,7 @@ div.ext_feedback {
     top: 0px;
     left: 0px;
     background-color: rgb(226, 226, 226);
-    border: dotted black 1px;
+    border: dashed rgb(0, 0, 0) 2px;
     z-index: 127;
 }
 
@@ -14,4 +14,21 @@ div.ext_feedback > a {
     top: 5px;
     right: 10px;
     cursor: pointer;
+}
+
+div.ext_feedback:after {
+    border: solid transparent;
+    content: '';
+    height: 0px;
+    width: 0px;
+    border-top-width: 15px;
+    border-bottom-width: 15px;
+    border-left-width: 30px;
+    border-right-width: 30px;
+    pointer-events: none;
+    position: absolute;
+    margin-top: -10px;
+    border-right-color: rgb(0, 0, 0);
+    right: 100%;
+    top: 30%;
 }
