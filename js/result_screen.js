@@ -21,6 +21,8 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'start') + scan_order(ROOT, $(this));
 
             print_dump(s_query, href_url, s_order);
+            
+            open_tab(href_url);
         });
     }
 
@@ -34,6 +36,8 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'b') + scan_order(ROOT, $(this));
 
             print_dump(s_query, href_url, s_order);
+
+            open_tab(href_url);
         })
     }
 
@@ -47,6 +51,8 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'first') + scan_order(ROOT, $(this));
 
             print_dump(s_query, href_url, s_order);
+
+            open_tab(href_url);
         });
     }
 
@@ -69,5 +75,9 @@ $(document).ready(function(){
 
     function print_dump(q, h, o) {
         console.log('検索クエリ:' + q + ', リンク先:' + h + ', 順位:' + o);
+    }
+
+    function open_tab(url) {
+        window.open(url, '_blank');
     }
 });
