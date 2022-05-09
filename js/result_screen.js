@@ -100,5 +100,17 @@ $(document).ready(function(){
         $('div.ext_feedback > a').click(function(e) {
             $(this).parent().remove();
         });
+
+        $('div.ext_feedback button').click(function(e) {
+            if($(this).attr('class').match(/btn-success/)) {
+                $('div.ext_feedback button.btn-danger').remove();
+            } else {
+                $('div.ext_feedback button.btn-success').remove();
+            }
+            $(this).animate({
+                width: '130'
+            }, 500);
+            setTimeout(function() {$('div.ext_feedback').remove();}, 1000);
+        });
     }
 });
