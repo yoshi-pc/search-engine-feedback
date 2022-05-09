@@ -1,24 +1,98 @@
 $(document).ready(function(){
-    $('div#search a').on('click', function(e){
-        // ページの遷移を抑止
-        e.preventDefault();
-        const ROOT = 'div#rso > div';
-        let s_query = $('input').val();
-        let s_order = -1;
-        let href_url = $(this).attr('href');
-        let parent = $(ROOT).children();
-        let params = new URLSearchParams(location.href);
-        let offset = params.get('start');
-        if (offset === null) offset = 0
-        else offset = parseInt(offset);
+    if(location.hostname.match(/google/)) {
+        onGoogle();
+    } else if(location.hostname.match(/yahoo/)) {
+        onYahoo();
+    } else if(location.hostname.match(/bing/)) {
+        onBing();
+    }
 
-        // 親要素をindex()が-1でなくなるところまで遡る
-        let temp = $(this);
+    $('a').click(function(e) {
+        console.log('x:' + e.clientX + ', y:' + e.clientY);
+    });
+
+    function onGoogle() {
+        $('div#search a').on('click', function(e) {
+            // ページの遷移を抑止
+            e.preventDefault();
+            const ROOT = 'div#rso > div';
+            let s_query = $('input').val();
+            let href_url = $(this).attr('href');
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
+
+            print_dump(s_query, href_url, s_order);
+            open_tab(href_url);
+            add_element(scanned[1]);
+        });
+    }
+
+    function onYahoo() {
+        $('div.sw-Card__title a').on('click', function(e) {
+            // ページの遷移を抑止
+            e.preventDefault();
+            const ROOT = '.Contents__innerGroupBody';
+            let s_query = $('input').val();
+            let href_url = $(this).attr('href');
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
+
+            print_dump(s_query, href_url, s_order);
+            open_tab(href_url);
+            add_element(scanned[1]);
+        })
+    }
+
+    function onBing() {
+        $('div.b_title a').on('click', function(e) {
+            // ページの遷移を抑止
+            e.preventDefault();
+            const ROOT = 'ol#b_results';
+            let s_query = $('input').val();
+            let href_url = $(this).attr('href');
+            let scanned = scan_order(ROOT, $(this));
+            let s_order = get_param_int(location.href, 'start') + scanned[0];
+
+            print_dump(s_query, href_url, s_order);
+            open_tab(href_url);
+            add_element(scanned[1]);
+        });
+    }
+
+    function scan_order(root, temp) {
+        let parent = $(root).children();
+        let s_order = -1;
         do {
             temp = temp.parent();
             s_order = parent.index(temp);
         } while(temp !== null && s_order === -1)
-        
-        console.log('検索クエリ:' + s_query + ', リンク先:' + href_url + ', 順位:' + (offset + s_order));
-    });
+
+        return [s_order, temp];
+    }
+
+    function get_param_int(url, key) {
+        let value = new URLSearchParams(url).get(key);
+        if (value === null) return 0;
+        else return parseInt(value);
+    }
+
+    function print_dump(q, h, o) {
+        console.log('検索クエリ:' + q + ', リンク先:' + h + ', 順位:' + o);
+    }
+
+    function open_tab(url) {
+        // window.open(url, '_blank');
+    }
+
+    function det_idname() {
+        const date = new Date();
+        return 'ext_' + date.getHours().toString().padStart(2, '0') + date.getMinutes().toString().padStart(2, '0') + date.getSeconds().toString().padStart(2, '0');
+    }
+
+    function add_element(elm) {
+        let offset_c = elm.offset();
+        const idname = det_idname();
+        $('body').append('<div class=\"ext_feedback\" id=' + idname + '>hello!</div>');
+        $('#' + idname).offset({top: offset_c.top, left: (offset_c.left + elm.width() + 100)});
+    }
 });
