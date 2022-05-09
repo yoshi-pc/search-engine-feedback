@@ -94,7 +94,11 @@ $(document).ready(function(){
         let offset_c = elm.offset();
         const idname = det_idname();
         let contents = '<form class=m-auto><button type=button class=\"btn btn-success m-2\">精巧</button><button type=button class=\"btn btn-danger m-2\">粗悪</button></form>'
-        $('body').append('<div class=ext_feedback id=' + idname + '><span>このWebページは</span>' + contents + '<span class=\"d-flex justify-content-end\">でした。</span></div>');
+        $('body').append('<div class=ext_feedback id=' + idname + '><a>[x]</a><span>このWebページは</span>' + contents + '<span class=\"d-flex justify-content-end\">でした。</span></div>');
         $('#' + idname).offset({top: offset_c.top, left: (offset_c.left + elm.width() + 50)});
+
+        $('div.ext_feedback > a').click(function(e) {
+            $(this).parent().remove();
+        });
     }
 });
