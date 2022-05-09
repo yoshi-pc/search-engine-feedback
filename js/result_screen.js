@@ -90,6 +90,7 @@ $(document).ready(function(){
     }
 
     function add_element(elm) {
+        $('.ext_feedback').remove();
         let offset_c = elm.offset();
         const idname = det_idname();
         let contents = '<form class=m-auto><button type=button class=\"btn btn-success m-2\">精巧</button><button type=button class=\"btn btn-danger m-2\">粗悪</button></form>'
