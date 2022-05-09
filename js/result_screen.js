@@ -23,6 +23,7 @@ $(document).ready(function(){
             print_dump(s_query, href_url, s_order);
             
             open_tab(href_url);
+            $('body').append('<div class=\"ext_feedback\">hello!</div>');
         });
     }
 
