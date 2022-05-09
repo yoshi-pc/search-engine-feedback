@@ -1,12 +1,17 @@
 div.ext_feedback {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    width: 100px;
     margin: 5px;
     padding: 10px;
     top: 0px;
     left: 0px;
-    background-color: aqua;
+    background-color: rgb(226, 226, 226);
+    border: dotted black 1px;
     z-index: 127;
+}
+
+div.ext_feedback > a {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
 }
