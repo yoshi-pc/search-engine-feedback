@@ -3,3 +3,8 @@ js/bootstrap.min.js
 js/bootstrap.min.js.map
 css/bootstrap.min.css
 css/bootstrap.min.css.map
+.DS_Store
+css/.DS_Store
+js/.DS_Store
+server/.DS_Store
+images/.DS_Store
