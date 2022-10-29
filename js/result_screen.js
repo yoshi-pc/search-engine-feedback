@@ -1,3 +1,12 @@
+var DATA_TO_SEND = {
+    query: "",
+    url: "",
+    order: "",
+    x: "",
+    y: "",
+    judge: 0
+};
+
 $(document).ready(function(){
     if(location.hostname.match(/google/)) {
         onGoogle();
@@ -22,6 +31,13 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
+            DATA_TO_SEND = {
+                query: s_query,
+                url: href_url,
+                order: s_order,
+                x: e.clientX,
+                y: e.clientY
+            };
             open_tab(href_url);
             add_element(scanned[1]);
         });
@@ -38,6 +54,13 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
+            DATA_TO_SEND = {
+                query: s_query,
+                url: href_url,
+                order: s_order,
+                x: e.clientX,
+                y: e.clientY
+            };
             open_tab(href_url);
             add_element(scanned[1]);
         })
@@ -54,6 +77,13 @@ $(document).ready(function(){
             let s_order = get_param_int(location.href, 'start') + scanned[0];
 
             print_dump(s_query, href_url, s_order);
+            DATA_TO_SEND = {
+                query: s_query,
+                url: href_url,
+                order: s_order,
+                x: e.clientX,
+                y: e.clientY
+            };
             open_tab(href_url);
             add_element(scanned[1]);
         });
@@ -89,6 +119,27 @@ $(document).ready(function(){
         return 'ext_' + date.getHours().toString().padStart(2, '0') + date.getMinutes().toString().padStart(2, '0') + date.getSeconds().toString().padStart(2, '0');
     }
 
+    function send_fb(judge) {
+        // 直接呼び出せないので、Global変数を参照してそのまま送信する。
+        DATA_TO_SEND["judge"] = judge;
+        console.log(JSON.stringify(DATA_TO_SEND));
+        $.ajax({
+            url: "https://liella.love/search-engine-feedback/endpoint.php",
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            data: JSON.stringify(DATA_TO_SEND),
+            timeout: 3000
+        }).then(function(data) {
+            console.log("feedback is sent.");
+        }).fail(function(req, status, error) {
+            console.log("sending feedback is failed.");
+            console.log(status);
+            console.log(error);
+        })
+        console.log(DATA_TO_SEND);
+    };
+
     function add_element(elm) {
         $('.ext_feedback').remove();
         let offset_c = elm.offset();
@@ -97,14 +148,17 @@ $(document).ready(function(){
         $('body').append('<div class=ext_feedback id=' + idname + '><a>[x]</a><span>このWebページは</span>' + contents + '<span class=\"d-flex justify-content-end\">でした。</span></div>');
         $('#' + idname).offset({top: offset_c.top, left: (offset_c.left + elm.width() + 50)});
 
+
         $('div.ext_feedback > a').click(function(e) {
             $(this).parent().remove();
         });
 
         $('div.ext_feedback button').click(function(e) {
             if($(this).attr('class').match(/btn-success/)) {
+                send_fb(1);
                 $('div.ext_feedback button.btn-danger').remove();
             } else {
+                send_fb(-1);
                 $('div.ext_feedback button.btn-success').remove();
             }
             $(this).animate({
