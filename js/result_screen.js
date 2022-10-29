@@ -111,7 +111,7 @@ $(document).ready(function(){
     }
 
     function open_tab(url) {
-        // window.open(url, '_blank');
+        window.open(url, '_blank');
     }
 
     function det_idname() {
