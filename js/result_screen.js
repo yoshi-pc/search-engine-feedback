@@ -20,73 +20,42 @@ $(document).ready(function(){
         console.log('x:' + e.clientX + ', y:' + e.clientY);
     });
 
-    function onGoogle() {
-        $('div#search a').on('click', function(e) {
-            // ページの遷移を抑止
-            e.preventDefault();
-            const ROOT = 'div#rso > div';
-            let s_query = $('input').val();
-            let href_url = $(this).attr('href');
-            let scanned = scan_order(ROOT, $(this));
-            let s_order = get_param_int(location.href, 'start') + scanned[0];
+    function click_event(e, ROOT) {
+        // ページの遷移を抑止
+        e.preventDefault();
+        let s_query = $('input').val();
+        let href_url = $(this).attr('href');
+        let scanned = scan_order(ROOT, $(this));
+        let s_order = get_param_int(location.href, 'start') + scanned[0];
 
-            print_dump(s_query, href_url, s_order);
-            DATA_TO_SEND = {
-                query: s_query,
-                url: href_url,
-                order: s_order,
-                x: e.clientX,
-                y: e.clientY
-            };
-            open_tab(href_url);
-            add_element(scanned[1]);
-        });
+        print_dump(s_query, href_url, s_order);
+        DATA_TO_SEND = {
+            query: s_query,
+            url: href_url,
+            order: s_order,
+            x: e.clientX,
+            y: e.clientY
+        };
+        open_tab(href_url);
+        add_element(scanned[1]);
+    }
+
+    function onGoogle() {
+        const ROOT = 'div#rso > div';
+        const target_sel = 'div#search a';
+        $(target_sel).on('click', (e) => click_event(e, ROOT));
     }
 
     function onYahoo() {
-        $('div.sw-Card__title a').on('click', function(e) {
-            // ページの遷移を抑止
-            e.preventDefault();
-            const ROOT = '.Contents__innerGroupBody';
-            let s_query = $('input').val();
-            let href_url = $(this).attr('href');
-            let scanned = scan_order(ROOT, $(this));
-            let s_order = get_param_int(location.href, 'start') + scanned[0];
-
-            print_dump(s_query, href_url, s_order);
-            DATA_TO_SEND = {
-                query: s_query,
-                url: href_url,
-                order: s_order,
-                x: e.clientX,
-                y: e.clientY
-            };
-            open_tab(href_url);
-            add_element(scanned[1]);
-        })
+        const ROOT = '.Contents__innerGroupBody';
+        const target_sel = 'div.sw-Card__title a';
+        $(target_sel).on('click', (e) => click_event(e, ROOT));
     }
 
     function onBing() {
-        $('div.b_title a').on('click', function(e) {
-            // ページの遷移を抑止
-            e.preventDefault();
-            const ROOT = 'ol#b_results';
-            let s_query = $('input').val();
-            let href_url = $(this).attr('href');
-            let scanned = scan_order(ROOT, $(this));
-            let s_order = get_param_int(location.href, 'start') + scanned[0];
-
-            print_dump(s_query, href_url, s_order);
-            DATA_TO_SEND = {
-                query: s_query,
-                url: href_url,
-                order: s_order,
-                x: e.clientX,
-                y: e.clientY
-            };
-            open_tab(href_url);
-            add_element(scanned[1]);
-        });
+        const ROOT = 'ol#b_results';
+        const target_sel = 'div.b_title a';
+        $(target_sel).on('click', (e) => click_event(e, ROOT));
     }
 
     function scan_order(root, temp) {
