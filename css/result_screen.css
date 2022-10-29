@@ -9,6 +9,7 @@ div.ext_feedback {
     font-size: 14px;
     background-color: rgb(226, 226, 226);
     border: dashed rgb(0, 0, 0) 2px;
+    color: rgb(0, 0, 0);
     z-index: 127;
 }
 

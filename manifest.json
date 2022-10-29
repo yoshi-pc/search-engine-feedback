@@ -23,7 +23,7 @@
     "content_scripts": [
         {
             "matches": ["https://www.google.co.jp/*", "https://www.google.com/*", "https://www.bing.com/*", "https://search.yahoo.co.jp/*"],
-            "js": ["js/jquery-3.6.0.min.js", "js/bootstrap.min.js", "js/result_screen.js"],
+            "js": ["js/jquery-3.6.1.min.js", "js/bootstrap.min.js", "js/result_screen.js"],
             "css": ["css/bootstrap.min.css", "css/result_screen.css"]
         }
     ]
