@@ -20,14 +20,21 @@ $(document).ready(function(){
         console.log('x:' + e.clientX + ', y:' + e.clientY);
     });
 
-    function click_event(e, ROOT) {
-        // ページの遷移を抑止
-        e.preventDefault();
+    function click_event(e, ROOT, current_elem) {
         let s_query = $('input').val();
-        let href_url = $(this).attr('href');
-        let scanned = scan_order(ROOT, $(this));
-        let s_order = get_param_int(location.href, 'start') + scanned[0];
-
+        let href_url = current_elem.attr('href');
+        let scanned = scan_order(ROOT, current_elem);
+        let s_order;
+        if (scanned[0] == -1) {
+            s_order = -1;
+            console.log("parent element not found.")
+        } else {
+            e.preventDefault();
+            s_order = get_param_int(location.href, 'start') + scanned[0];
+            open_tab(href_url);
+            add_element(scanned[1]);
+        }
+        
         print_dump(s_query, href_url, s_order);
         DATA_TO_SEND = {
             query: s_query,
@@ -36,34 +43,49 @@ $(document).ready(function(){
             x: e.clientX,
             y: e.clientY
         };
-        open_tab(href_url);
-        add_element(scanned[1]);
     }
 
     function onGoogle() {
         const ROOT = 'div#rso > div';
         const target_sel = 'div#search a';
-        $(target_sel).on('click', (e) => click_event(e, ROOT));
+        $(target_sel).on('click', function(e) {
+            click_event(e, ROOT, $(this));
+        });
     }
 
     function onYahoo() {
         const ROOT = '.Contents__innerGroupBody';
         const target_sel = 'div.sw-Card__title a';
-        $(target_sel).on('click', (e) => click_event(e, ROOT));
+        $(target_sel).on('click', function(e) {
+            click_event(e, ROOT, $(this))
+        });
     }
 
     function onBing() {
         const ROOT = 'ol#b_results';
         const target_sel = 'div.b_title a';
-        $(target_sel).on('click', (e) => click_event(e, ROOT));
+        $(target_sel).on('click', function(e) {
+            click_event(e, ROOT, $(this))
+        });
     }
 
     function scan_order(root, temp) {
+        // tempはクリックした要素
+        // tempから1つずつ親に移って、index()が取得できるまで遡る
+        // rootは検索結果のセルの要素
+        // parentにはセルの要素が連なっている
         let parent = $(root).children();
         let s_order = -1;
+        let i = 0;
         do {
             temp = temp.parent();
             s_order = parent.index(temp);
+
+            if (i > 20) {
+                return [-1, null];
+            } else {
+                i++;
+            }
         } while(temp !== null && s_order === -1)
 
         return [s_order, temp];
@@ -110,6 +132,10 @@ $(document).ready(function(){
     };
 
     function add_element(elm) {
+        if (elm == null) {
+            return;
+        }
+
         $('.ext_feedback').remove();
         let offset_c = elm.offset();
         const idname = det_idname();
