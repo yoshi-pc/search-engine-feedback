@@ -5,7 +5,7 @@
 
     $sql = new mysqli("*", "*", "*", "*");
 
-    $query = "INSERT INTO `sent_data` (query, url, result_order, x, y, judge) VALUES ('{$data["query"]}', '{$data["url"]}', {$data["order"]}, {$data["x"]}, {$data["y"]}, {$data["judge"]})";
+    $query = "INSERT INTO `sent_data` (query, url, result_order, x, y, judge, ip_addr) VALUES ('{$data["query"]}', '{$data["url"]}', {$data["order"]}, {$data["x"]}, {$data["y"]}, {$data["judge"]}, '{$_SERVER["REMOTE_ADDR"]}')";
     $query_result = $sql->query($query);
     
     $result = Array(
