@@ -139,25 +139,43 @@ $(document).ready(function(){
         $('.ext_feedback').remove();
         let offset_c = elm.offset();
         const idname = det_idname();
-        let contents = '<form class=m-auto><button type=button class=\"btn btn-success m-2\">精巧</button><button type=button class=\"btn btn-danger m-2\">粗悪</button></form>'
-        $('body').append('<div class=ext_feedback id=' + idname + '><a>[x]</a><span>このWebページは</span>' + contents + '<span class=\"d-flex justify-content-end\">でした。</span></div>');
+        let contents = '\
+        <form class=m-auto>\
+            <button type=button class=\"btn btn-success m-1\">高い</button>\
+            <button type=button class=\"btn btn-secondary m-1\">普通</button>\
+            <button type=button class=\"btn btn-danger m-1\">低い</button>\
+        </form>\
+        ';
+        $('body').append('\
+        <div class=ext_feedback id=' + idname + '>\
+            <a>[x]</a>\
+            <span>このWebページの<dfn>信頼度</dfn>は</span>' + contents + '<span class=\"d-flex justify-content-end\">です。\
+            </span>\
+        </div>'
+        );
         $('#' + idname).offset({top: offset_c.top, left: (offset_c.left + elm.width() + 50)});
-
 
         $('div.ext_feedback > a').click(function(e) {
             $(this).parent().remove();
         });
 
         $('div.ext_feedback button').click(function(e) {
-            if($(this).attr('class').match(/btn-success/)) {
+            const button_attr = $(this).attr('class');
+            if(button_attr.match(/btn-success/)) {
                 send_fb(1);
+                $('div.ext_feedback button.btn-secondary').remove();
+                $('div.ext_feedback button.btn-danger').remove();
+            } else if(button_attr.match(/btn-secondary/)) {
+                send_fb(0);
+                $('div.ext_feedback button.btn-success').remove();
                 $('div.ext_feedback button.btn-danger').remove();
             } else {
                 send_fb(-1);
                 $('div.ext_feedback button.btn-success').remove();
+                $('div.ext_feedback button.btn-secondary').remove();
             }
             $(this).animate({
-                width: '130'
+                width: '190'
             }, 500);
             setTimeout(function() {$('div.ext_feedback').remove();}, 1000);
         });
