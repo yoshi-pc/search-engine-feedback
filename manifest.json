@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Search Engine Feedback",
     "description": "Send feedbacks to improve search engine's results.",
-    "version": "0.1",
+    "version": "0.2",
     "permissions": ["storage", "activeTab", "scripting"],
     "action": {
         "default_popup": "html/popup.html",
