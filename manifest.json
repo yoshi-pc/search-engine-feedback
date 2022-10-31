@@ -3,7 +3,7 @@
     "name": "Search Engine Feedback",
     "description": "Send feedbacks to improve search engine's result.",
     "version": "0.1",
-    "permissions": ["storage", "activeTab", "scripting", "https://liella.love/"],
+    "permissions": ["storage", "activeTab", "scripting"],
     "action": {
         "default_popup": "html/popup.html",
         "default_icon": {
