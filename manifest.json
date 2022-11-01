@@ -4,15 +4,6 @@
     "description": "Send feedbacks to improve search engine's result.",
     "version": "0.1",
     "permissions": ["storage", "activeTab", "scripting"],
-    "action": {
-        "default_popup": "html/popup.html",
-        "default_icon": {
-            "16": "images/icon_16.png",
-            "32": "images/icon_32.png",
-            "48": "images/icon_48.png",
-            "128": "images/icon_128.png"
-        }
-    },
     "icons": {
         "16": "images/icon_16.png",
         "32": "images/icon_32.png",
