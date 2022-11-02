@@ -1,9 +1,9 @@
 {
     "manifest_version": 3,
     "name": "Search Engine Feedback",
-    "description": "Send feedbacks to improve search engine's result.",
-    "version": "0.1",
-    "permissions": ["storage", "activeTab", "scripting"],
+    "description": "Send feedbacks to improve search engine's results.",
+    "version": "0.2.3",
+    "permissions": [],
     "icons": {
         "16": "images/icon_16.png",
         "32": "images/icon_32.png",
