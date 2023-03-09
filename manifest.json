@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Search Engine Feedback",
     "description": "Send feedbacks to improve search engine's results.",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "permissions": [],
     "icons": {
         "16": "images/icon_16.png",
