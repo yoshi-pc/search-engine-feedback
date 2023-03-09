@@ -23,6 +23,9 @@ $(document).ready(function(){
     function click_event(e, ROOT, current_elem) {
         let s_query = $('input').val();
         let href_url = current_elem.attr('href');
+        if (href_url == null || href_url === "#") {
+            return null;
+        }
         let scanned = scan_order(ROOT, current_elem);
         let s_order;
         if (scanned[0] == -1) {
