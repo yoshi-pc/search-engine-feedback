@@ -20,8 +20,8 @@ $(document).ready(function(){
         console.log('x:' + e.clientX + ', y:' + e.clientY);
     });
 
-    function click_event(e, ROOT, current_elem) {
-        let s_query = $('input').val();
+    function click_event(e, ROOT, current_elem, query_box) {
+        let s_query = $(query_box).val();
         let href_url = current_elem.attr('href');
         if (href_url == null || href_url === "#") {
             return null;
@@ -52,7 +52,7 @@ $(document).ready(function(){
         const ROOT = 'div#rso > div';
         const target_sel = 'div#search a';
         $(target_sel).on('click', function(e) {
-            click_event(e, ROOT, $(this));
+            click_event(e, ROOT, $(this), "textarea");
         });
     }
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
         const ROOT = '.Contents__innerGroupBody';
         const target_sel = 'div.sw-Card__title a';
         $(target_sel).on('click', function(e) {
-            click_event(e, ROOT, $(this))
+            click_event(e, ROOT, $(this), "#header > div.Header__inner > div.Header__innerItem > div.SearchBox.SearchBox--north.js-SearchBox--north > form > div.SearchBox__searchInputWrap > input.SearchBox__searchInput.js-SearchBox__searchInput");
         });
     }
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
         const ROOT = 'ol#b_results';
         const target_sel = 'div.b_title a';
         $(target_sel).on('click', function(e) {
-            click_event(e, ROOT, $(this))
+            click_event(e, ROOT, $(this), "#sb_form_q");
         });
     }
 
